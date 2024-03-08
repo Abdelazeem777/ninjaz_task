@@ -3,5 +3,5 @@ abstract class ApiEndPoint {
 
   static const _REQUEST_URL = '$BASE_URL/data/v1';
 
-  static const POSTS = '$_REQUEST_URL/post';
+  static const GET_POSTS = '$_REQUEST_URL/post';
 }

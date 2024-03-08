@@ -15,7 +15,6 @@ extension HomeStateX on HomeState {
 }
 
 @immutable
-
 class HomeState {
   final HomeStateStatus status;
   final String? errorMessage;
@@ -35,7 +34,7 @@ class HomeState {
   }
 
   @override
-  int get hashCode =>  status.hashCode ^ errorMessage.hashCode;
+  int get hashCode => status.hashCode ^ errorMessage.hashCode;
 
   HomeState copyWith({
     HomeStateStatus? status,

@@ -4,13 +4,13 @@ import '../../../../api_end_point.dart';
 import '../../../../core/exceptions/request_exception.dart';
 import '../../../../core/service/network_service.dart';
 
-abstract class HomeRemoteDataSource {
+abstract class HomeLocalDataSource {
   Future<List<PostModel>> getPosts([int page = 0, int limit = 10]);
 }
 
-class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
+class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   final NetworkService _networkService;
-  HomeRemoteDataSourceImpl(this._networkService);
+  HomeLocalDataSourceImpl(this._networkService);
 
   @override
   Future<List<PostModel>> getPosts([int page = 0, int limit = 10]) async {

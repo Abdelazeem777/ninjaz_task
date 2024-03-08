@@ -24,7 +24,9 @@ abstract class NetworkService {
 class NetworkServiceImpl implements NetworkService {
   NetworkServiceImpl();
 
-  final _dio = Dio(BaseOptions(validateStatus: (_) => true));
+  final _dio = Dio(BaseOptions(
+      headers: {'app-id': '65eb2bc3787b68499879a7e1'},
+      validateStatus: (_) => true));
 
   @override
   Future<Response> get(
@@ -36,7 +38,7 @@ class NetworkServiceImpl implements NetworkService {
     return _connectionExceptionCatcher(() => _get(
           url,
           queryParameters: queryParameters,
-          headers: headers!,
+          headers: headers,
           responseType: responseType,
         ));
   }
@@ -53,7 +55,7 @@ class NetworkServiceImpl implements NetworkService {
           url,
           queryParameters: queryParameters,
           data: data,
-          headers: headers!,
+          headers: headers,
           responseType: responseType,
         ));
   }
@@ -61,10 +63,10 @@ class NetworkServiceImpl implements NetworkService {
   Future<Response> _get(
     String apiBaseUrl, {
     Map<String, dynamic>? queryParameters,
-    required Map<String, dynamic> headers,
+    Map<String, dynamic>? headers,
     ResponseType? responseType,
   }) async {
-    Future<Response> requestCallback(Map<String, dynamic> headers) async =>
+    Future<Response> requestCallback(Map<String, dynamic>? headers) async =>
         _dio.get(
           apiBaseUrl,
           queryParameters: queryParameters,
@@ -86,10 +88,10 @@ class NetworkServiceImpl implements NetworkService {
     String apiBaseUrl, {
     Map<String, dynamic>? queryParameters,
     data,
-    required Map<String, dynamic> headers,
+    Map<String, dynamic>? headers,
     ResponseType? responseType,
   }) async {
-    Future<Response> requestCallback(Map<String, dynamic> headers) async =>
+    Future<Response> requestCallback(Map<String, dynamic>? headers) async =>
         _dio.post(
           apiBaseUrl,
           queryParameters: queryParameters,

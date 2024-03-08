@@ -3,7 +3,7 @@ import '../datasources/home_remote_data_source.dart';
 import '../models/post_model.dart';
 
 abstract class HomeRepository {
-  Future<List<PostModel>> getPosts([int page = 0, int limit = 10]);
+  Future<List<PostModel>> getPosts({int page = 0, int limit = 10});
 }
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -17,7 +17,7 @@ class HomeRepositoryImpl implements HomeRepository {
         _localDataSource = homeLocalDataSource;
 
   @override
-  Future<List<PostModel>> getPosts([int page = 0, int limit = 10]) {
-    return _remoteDataSource.getPosts(page, limit);
+  Future<List<PostModel>> getPosts({int page = 0, int limit = 10}) {
+    return _remoteDataSource.getPosts(page: page, limit: limit);
   }
 }

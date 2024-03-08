@@ -5,7 +5,7 @@ import '../../../../core/exceptions/request_exception.dart';
 import '../../../../core/service/network_service.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<PostModel>> getPosts([int page = 0, int limit = 10]);
+  Future<List<PostModel>> getPosts({int page = 0, int limit = 10});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -13,7 +13,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this._networkService);
 
   @override
-  Future<List<PostModel>> getPosts([int page = 0, int limit = 10]) async {
+  Future<List<PostModel>> getPosts({int page = 0, int limit = 10}) async {
     const url = ApiEndPoint.GET_POSTS;
 
     return _networkService.get(url).then((response) {

@@ -32,9 +32,9 @@ class HomeCubit extends BaseCubit<HomeState> {
     }
   }
 
-  Future<void> refreshPosts() => loadPosts(true);
+  Future<void> refresh() => loadPosts(true);
 
-  Future<void> loadMoreEvents() async {
+  Future<void> loadMorePosts() async {
     if (state.isLoadingMore) return;
     if ((state.posts ?? []).length < _postsLimit) return;
 

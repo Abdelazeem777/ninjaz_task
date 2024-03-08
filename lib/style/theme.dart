@@ -18,8 +18,11 @@ final theme = ThemeData(
       statusBarIconBrightness: Brightness.dark,
     ),
   ),
-  iconTheme: const IconThemeData(color: Colors.white),
-  colorScheme: const ColorScheme.light(primary: Colors.white),
+  iconTheme: const IconThemeData(color: AppColors.PRIMARY_COLOR),
+  colorScheme: const ColorScheme.light(primary: AppColors.PRIMARY_COLOR),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    refreshBackgroundColor: AppColors.PRIMARY_COLOR,
+  ),
   radioTheme: RadioThemeData(
     overlayColor: MaterialStateColor.resolveWith(
       (states) => AppColors.GREY_NORMAL_COLOR,

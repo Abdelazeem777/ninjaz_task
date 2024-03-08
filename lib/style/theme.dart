@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'app_colors.dart';
 
 final theme = ThemeData(
-  scaffoldBackgroundColor: Colors.transparent,
   textTheme: TextTheme(
     bodySmall: _normalText(14.0),
     bodyMedium: _normalText(16.0),
@@ -33,7 +32,7 @@ final theme = ThemeData(
 
 TextStyle _boldText(double size) {
   return TextStyle(
-    color: AppColors.TEXT_LIGHT,
+    color: AppColors.TEXT_DARK,
     fontWeight: FontWeight.bold,
     fontSize: size,
   );
@@ -41,7 +40,7 @@ TextStyle _boldText(double size) {
 
 TextStyle _normalText(double size) {
   return TextStyle(
-    color: AppColors.TEXT_LIGHT,
+    color: AppColors.TEXT_DARK,
     fontWeight: FontWeight.w400,
     fontSize: size,
   );

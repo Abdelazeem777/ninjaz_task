@@ -26,7 +26,7 @@ void main() {
             likes: i,
             tags: ['tag $i'],
             text: 'text $i',
-            publishDate: '2021-09-01',
+            publishDate: DateTime(2021, 9, 1),
             owner: null));
     test('should return list of PostModel when the response code is 200',
         () async {

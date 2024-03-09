@@ -9,7 +9,7 @@ class PostModel {
   final int likes;
   final List<String>? tags;
   final String? text;
-  final String? publishDate;
+  final DateTime? publishDate;
   final OwnerModel? owner;
   PostModel({
     required this.id,
@@ -27,7 +27,7 @@ class PostModel {
     int? likes,
     ValueGetter<List<String>?>? tags,
     ValueGetter<String?>? text,
-    ValueGetter<String?>? publishDate,
+    ValueGetter<DateTime?>? publishDate,
     ValueGetter<OwnerModel?>? owner,
   }) {
     return PostModel(
@@ -48,7 +48,7 @@ class PostModel {
       'likes': likes,
       'tags': tags,
       'text': text,
-      'publishDate': publishDate,
+      'publishDate': publishDate?.toIso8601String(),
       'owner': owner?.toMap(),
     }..removeWhere((_, v) => v == null);
   }
@@ -60,7 +60,9 @@ class PostModel {
       likes: map['likes']?.toInt() ?? 0,
       tags: List<String>.from(map['tags']),
       text: map['text'],
-      publishDate: map['publishDate'],
+      publishDate: map['publishDate'] != null
+          ? DateTime.parse(map['publishDate'])
+          : null,
       owner: map['owner'] != null ? OwnerModel.fromMap(map['owner']) : null,
     );
   }

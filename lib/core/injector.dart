@@ -5,6 +5,7 @@ import '../features/home/data/datasources/home_local_data_source.dart';
 import '../features/home/data/datasources/home_remote_data_source.dart';
 import 'service/cache_service.dart';
 import 'service/network_service.dart';
+import 'utils/connection_checker.dart';
 
 class Injector {
   static final Injector _singleton = Injector._internal();
@@ -24,6 +25,7 @@ class Injector {
       _flyweightMap[HomeRepository] ??= HomeRepositoryImpl(
         homeLocalDataSource: homeLocalDataSource,
         homeRemoteDataSource: homeRemoteDataSource,
+        connectionChecker: connectionChecker,
       );
 
   // Data sources
@@ -39,4 +41,8 @@ class Injector {
       _flyweightMap[NetworkService] ??= NetworkServiceImpl();
   CacheService get cacheService =>
       _flyweightMap[CacheService] ??= CacheServiceImpl();
+
+  // Utils
+  ConnectionChecker get connectionChecker =>
+      _flyweightMap[ConnectionChecker] ??= ConnectionChecker();
 }

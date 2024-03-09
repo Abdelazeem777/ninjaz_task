@@ -43,12 +43,14 @@ dependencies:
   realm: ^1.9.0
   requests_inspector: ^3.4.1
   rxdart: ^0.27.7
+  timeago: ^3.6.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   mocktail: ^1.0.3
+  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

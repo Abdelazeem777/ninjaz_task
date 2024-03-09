@@ -8,6 +8,8 @@ name: Dart
 on:
   push:
     branches: ["beta"]
+  release:
+    types: [created]
 
 jobs:
   build:

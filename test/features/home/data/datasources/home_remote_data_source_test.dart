@@ -31,7 +31,10 @@ void main() {
     test('should return list of PostModel when the response code is 200',
         () async {
       // arrange
-      when(() => networkServiceMock.get(any())).thenAnswer(
+      when(() => networkServiceMock.get(
+            any(),
+            queryParameters: any(named: 'queryParameters'),
+          )).thenAnswer(
         (_) async => Response(
           requestOptions: RequestOptions(baseUrl: ApiEndPoint.BASE_URL),
           statusCode: 200,
@@ -49,7 +52,10 @@ void main() {
     test('should throw RequestException when the response code is not 200',
         () async {
       // arrange
-      when(() => networkServiceMock.get(any())).thenAnswer(
+      when(() => networkServiceMock.get(
+            any(),
+            queryParameters: any(named: 'queryParameters'),
+          )).thenAnswer(
         (_) async => Response(
           requestOptions: RequestOptions(baseUrl: ApiEndPoint.BASE_URL),
           statusCode: 400,

@@ -16,7 +16,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<List<PostModel>> getPosts({int page = 0, int limit = 10}) async {
     const url = ApiEndPoint.GET_POSTS;
 
-    return _networkService.get(url).then((response) {
+    return _networkService.get(
+      url,
+      queryParameters: {'page': page, 'limit': limit},
+    ).then((response) {
       if (response.statusCode != 200) throw RequestException(response.data);
       final result = response.data;
       final data = result['data'] as List;

@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Copy Firebase credentials content from secrets to file
+        run: |
+          echo ${{ secrets.FIREBASE_DIST_KEY }} | base64 -d > firebase_dist_key.json
+
       - name: Set Up Java
         uses: actions/setup-java@v3.12.0
         with:
@@ -34,3 +38,17 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK to Firebase
+        run: |
+          ls -l
+          cd android
+
+          # Install Firebase App Distribution plugin for Fastlane
+          fastlane add_plugin firebase_app_distribution
+
+          # Distribute to testers using Fastlane
+          fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json

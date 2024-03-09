@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -141,15 +142,103 @@ class _PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         boxShadow: AppColors.SHADOW_LIGHT,
         color: Colors.white,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(post.owner?.firstName ?? ''),
-          Text(post.text ?? ''),
+          _buildTopRow(),
+          if (post.text?.isNotEmpty == true) _buildText(),
+          if (post.image?.isNotEmpty == true) _buildImage(),
+          _buildBottomRow(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTopRow() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 20.0,
+            backgroundImage: NetworkImage(post.owner?.picture ?? ''),
+          ),
+          const SizedBox(width: 8.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${post.owner?.firstName} ${post.owner?.lastName}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (post.publishDate != null)
+                Text(
+                  timeago.format(post.publishDate!),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildText() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        post.text ?? '',
+        style: const TextStyle(
+          fontSize: 16.0,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    return Image.network(
+      post.image ?? '',
+      fit: BoxFit.cover,
+      height: 200.0,
+    );
+  }
+
+  Widget _buildBottomRow() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.favorite),
+          const SizedBox(width: 8.0),
+          Text('${post.likes}'),
+          const SizedBox(width: 8.0),
+          const Spacer(),
+          if (post.tags?.isNotEmpty == true) _buildTags(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTags() {
+    return Expanded(
+      child: Wrap(
+        spacing: 8.0,
+        children: post.tags!
+            .map((tag) => Chip(
+                  padding: const EdgeInsets.all(2.0),
+                  label: Text(
+                    tag,
+                    style: const TextStyle(fontSize: 12.0),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

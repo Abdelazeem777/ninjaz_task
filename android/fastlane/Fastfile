@@ -16,23 +16,22 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
-
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
-
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+  desc "Destrbute apk for testers"
+  lane :distributeToTesters do |options|
+    release_notes= "\n\n" + changelog_from_git_commits(
+      merge_commit_filtering: "exclude_merges",
+      commits_count: 40,
+      pretty: "- %s"
+    )
+ 
+    firebase_app_distribution(
+      app: "1:1002622823432:android:9c853fc732acaed51f35bd",
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
+      testers: "karim@ninjaz.ae, abdelazeem263@gmail.com",
+      release_notes: "Ninjaz Task" +  release_notes,
+      service_credentials_file: options[:firebaseDistFile]
+    )
+    
   end
 end

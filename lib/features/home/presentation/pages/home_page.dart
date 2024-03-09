@@ -62,16 +62,15 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildPostsList(List<PostModel> list) {
-    return ListView.builder(
+    return ListView.separated(
       physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(16.0),
       itemCount: list.length + 1,
+      separatorBuilder: (_, __) => const SizedBox(height: 16.0),
       itemBuilder: (_, index) {
         if (index == list.length) return _buildPaginationLoading();
         final post = list[index];
-        return ListTile(
-          title: Text(post.owner?.firstName ?? ''),
-          subtitle: Text(post.text ?? ''),
-        );
+        return _PostCard(post: post);
       },
     );
   }
@@ -126,6 +125,31 @@ class HomePage extends StatelessWidget {
     scaffoldMessenger.showSnackBar(
       SnackBar(
         content: Text(message),
+      ),
+    );
+  }
+}
+
+class _PostCard extends StatelessWidget {
+  const _PostCard({
+    super.key,
+    required this.post,
+  });
+
+  final PostModel post;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        boxShadow: AppColors.SHADOW_LIGHT,
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          Text(post.owner?.firstName ?? ''),
+          Text(post.text ?? ''),
+        ],
       ),
     );
   }

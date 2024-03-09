@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ninjaz_task/core/injector.dart';
 import 'package:ninjaz_task/features/home/presentation/pages/home_page.dart';
+import 'package:ninjaz_task/features/splash/presentation/pages/splash_page.dart';
 import 'package:requests_inspector/requests_inspector.dart';
 
 import 'core/utils/connection_checker.dart';
 import 'firebase_options.dart';
+import 'routes.dart';
 import 'style/theme.dart';
 
 enum Env {
@@ -53,10 +55,11 @@ class _MyAppState extends State<MyApp> {
     ]);
 
     return MaterialApp(
-      home: const HomePage(),
+      home: const SplashPage(),
       debugShowCheckedModeBanner: false,
       theme: theme,
       title: 'Ninjaz Task',
+      routes: routes,
     );
   }
 }

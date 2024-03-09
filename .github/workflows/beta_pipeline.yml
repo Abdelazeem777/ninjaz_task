@@ -51,7 +51,7 @@ jobs:
           cd android
 
           # Install Firebase App Distribution plugin for Fastlane
-          bundle exec fastlane add_plugin firebase_app_distribution
+          fastlane add_plugin firebase_app_distribution
 
           # Distribute to testers using Fastlane
-          bundle exec fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json
+          fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json

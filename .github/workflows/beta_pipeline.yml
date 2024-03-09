@@ -54,4 +54,4 @@ jobs:
           gem install fastlane-plugin-firebase_app_distribution --user-install
 
           # Distribute to testers using Fastlane
-          fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json
+          fastlane android distributeToTesters firebaseDistFile:../firebase_dist_key.json

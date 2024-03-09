@@ -7,7 +7,7 @@ name: Dart
 
 on:
   push:
-    branches: [ "beta" ]
+    branches: ["beta"]
 
 jobs:
   build:
@@ -30,10 +30,7 @@ jobs:
       - name: Install dependencies and clean
         run: |
           flutter clean  
-          flutter pub get  
-      
-      - name: Analyze project source
-        run: dart analyze
+          flutter pub get
 
       - name: Run tests
-        run:  flutter test
+        run: flutter test

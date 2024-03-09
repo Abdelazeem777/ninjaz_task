@@ -33,6 +33,7 @@ dependencies:
   cached_network_svg_image: ^0.0.5
   connectivity_plus: ^5.0.2
   dio: ^5.4.1
+  firebase_core: ^2.27.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4

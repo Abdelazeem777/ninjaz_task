@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ninjaz_task/features/home/presentation/pages/home_page.dart';
 import 'package:requests_inspector/requests_inspector.dart';
 
 import 'core/utils/connection_checker.dart';
+import 'firebase_options.dart';
 import 'style/theme.dart';
 
 enum Env {
@@ -23,7 +25,7 @@ const inspectorEnabled = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await ConnectionChecker().initialize();
 
   runApp(

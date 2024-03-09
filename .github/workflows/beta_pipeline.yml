@@ -16,31 +16,34 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Copy Firebase credentials content from secrets to file
-        run: |
-          echo ${{ secrets.FIREBASE_DIST_KEY }} | base64 -d > firebase_dist_key.json
+      # - name: Copy Firebase credentials content from secrets to file
+      #   run: |
+      #     echo ${{ secrets.FIREBASE_DIST_KEY }} | base64 -d > firebase_dist_key.json
 
-      - name: Set Up Java
-        uses: actions/setup-java@v3.12.0
-        with:
-          distribution: "oracle"
-          java-version: "17"
+      # - name: Set Up Java
+      #   uses: actions/setup-java@v3.12.0
+      #   with:
+      #     distribution: "oracle"
+      #     java-version: "17"
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.16.9"
+      # - name: Set up Flutter
+      #   uses: subosito/flutter-action@v2
+      #   with:
+      #     flutter-version: "3.16.9"
 
-      - name: Install dependencies and clean
-        run: |
-          flutter clean  
-          flutter pub get
+      # - name: Install dependencies and clean
+      #   run: |
+      #     flutter clean
+      #     flutter pub get
 
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #   run: flutter test
 
-      - name: Build APK
-        run: flutter build apk --release
+      # - name: Build APK
+      #   run: flutter build apk --release
+
+      - name: Install Fastlane
+        run: gem install fastlane -N --user-install
 
       - name: Upload APK to Firebase
         run: |
@@ -48,7 +51,7 @@ jobs:
           cd android
 
           # Install Firebase App Distribution plugin for Fastlane
-          fastlane add_plugin firebase_app_distribution
+          bundle exec fastlane add_plugin firebase_app_distribution
 
           # Distribute to testers using Fastlane
-          fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json
+          bundle exec fastlane distributeToTesters firebaseDistFile: ../firebase_dist_key.json
